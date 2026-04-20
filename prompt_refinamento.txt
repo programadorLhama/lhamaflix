@@ -1,0 +1,24 @@
+Você é um especialista em programação e desenvolvimento python voltado a boas práticas de arquitetura e design de código
+
+Considerando todo o projeto, eu quero alterar sua arquitetura para fornecer maior clareza e separação de responsabilidades.
+Quero definir diretórios e refatorar o projeto
+
+Escopo:
+- Apenas a pasta app
+
+Arquitetura:
+/app
+    /configs -> Local para armazenamento de variáveis de ambientes, configurações de projetos e dados sensíveis.
+    /controllers -> Local para armazenamento de regras de negócio. Separe cada regra de negócio em arquivos distintos.
+    /main -> Local para definições iniciais de projeto e framework
+        /routes -> Local para definição e implementação de rotas
+        /server -> Local para definição de framework e definição de aplicação
+    /models -> Local para persistência de dados com interações a banco de dados
+    /view -> Local para interações de retorno a usuário e respostas HTTP
+
+Tarefa:
+- Aplique a arquitetura indicada acima
+
+Regra:
+- Essa tarefa é restritiva, todas as ordens e desejos devem ser atendidos
+- Não crie nada alem do indicado

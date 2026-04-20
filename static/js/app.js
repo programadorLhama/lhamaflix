@@ -1,8 +1,8 @@
 /**
- * Player HLS para o vídeo semDeyvin (videos/semDeyvin.mp4).
- * Usa a mesma origem que a página (ex.: http://localhost:6000).
+ * Player HLS para o vídeo Corrente_do_Mal (videos/Corrente_do_Mal.mp4).
+ * Usa a mesma origem que a página (ex.: http://localhost:8001).
  */
-const VIDEO_ID = "semDeyvin";
+const VIDEO_ID = "Corrente_do_Mal";
 
 const statusEl = document.getElementById("status");
 const btnPrepare = document.getElementById("btnPrepare");
