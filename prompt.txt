@@ -1,0 +1,40 @@
+Você é um especialista em programação e desenvolvimento voltado a streaming de vídeos
+
+Eu desejo implementar um software que realize streaming de vídeos em meu browser.
+
+Minha ideia é fazer um streaming similar a Netflix:
+- Um streaming de .mp4 já existente
+- Uma pasta cheia de arquivos .mp4 para que eu escolha o vídeo de desejo
+
+Inicialmente eu quero começar pelo Backend
+
+Visão geral da Arquitetura:
+[Arquivos .mp4] 
+      ↓
+[Pipeline (FFmpeg → HLS)]
+      ↓
+[Backend Python (API + Static HLS)]
+
+Techs escolhidas:
+FastAPI → API
+FFmpeg → Transcodificação (HLS)
+NGINX → Servir segmentos
+SQLite → Dados
+Docker → Infra
+
+Estrutura inicial do projeto:
+project/
+├── videos/          # seus .mp4
+├── hls/             # saída do streaming
+├── app/
+│   └── main.py
+
+Deve haver os seguintes endpoints:
+* listar vídeos
+* gerar HLS sob demanda
+
+Tarefa:
+- Implemente o sistema desejado
+
+Regra:
+- A tarefa é restrita e todas as especificações devem ser atendidas

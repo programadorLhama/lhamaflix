@@ -1,0 +1,23 @@
+services:
+  api:
+    build: .
+    volumes:
+      - ./videos:/videos
+      - ./hls:/hls
+      - ./data:/data
+    environment:
+      VIDEOS_DIR: /videos
+      HLS_DIR: /hls
+      DB_PATH: /data/app.db
+    expose:
+      - "8000"
+
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./hls:/var/hls:ro
+    depends_on:
+      - api

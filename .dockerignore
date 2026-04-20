@@ -1,0 +1,7 @@
+.venv
+__pycache__
+*.pyc
+.git
+hls/*
+!hls/.gitkeep
+data/*.db

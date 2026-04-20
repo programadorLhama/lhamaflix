@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>semDeyvin — HLS</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1>semDeyvin</h1>
+      <p class="subtitle">Reprodução HLS via API local</p>
+    </header>
+
+    <main class="main">
+      <section class="panel">
+        <p class="hint">
+          O vídeo esperado é <code>videos/semDeyvin.mp4</code>. Primeiro gera-se o pacote HLS; depois o
+          player carrega o manifesto.
+        </p>
+        <div class="actions">
+          <button type="button" id="btnPrepare" class="btn btn-primary">Preparar HLS</button>
+          <button type="button" id="btnPlay" class="btn" disabled>Reproduzir</button>
+        </div>
+        <p id="status" class="status" role="status"></p>
+      </section>
+
+      <section class="player-wrap">
+        <video id="video" class="video" controls playsinline></video>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.7/dist/hls.min.js"></script>
+    <script src="/js/app.js" defer></script>
+  </body>
+</html>
