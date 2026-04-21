@@ -1,28 +1,56 @@
 Você é um especialista em programação e desenvolvimento voltado implementação de frontend
 
-Eu quero alterar a interface visual da aplicação para uma outra estrutura UX
-
-Escopo:
-* /static
+Eu quero implementar uma interface visual de uma aplicação para reprodução de vídeos em streaming. Eu já possuo um backend
 
 Design da interface:
-* Presente no arquivo em anexo frontend.png
+* Presente no arquivo em anexo
 
-Detalhes da interface:
+Detalhes da implementação:
 * Os filmes devem ser apresentados como cards um do lado do outro em colunas de 3 e linhas de 3 (3x3)
 * Os titulos devem se manter em cima do card do filme
 * Para executar o filme, basta clicar no card
 * Os filmes devem se manter alinhados ao centro com distanciamento das bordas do browser
 * deve haver botões de paginação abaixo dos cards
-* Não há botão para conversão de video .mp4 em hls
+* Ao clickar no card, o usuário será redirecionado a uma outra tela com o player para o filme escolhido
+* Há um botão para retornar a tela de listagem de filmes
 
-Rota de listagem:
-* Rota de listagem de filmes /videos/hls
+Rotas do sistema e função de cada uma (Em localhost:8001):
+* GET /api/health
+Verifica a saúde da API (endpoint de status básico).
+* GET /api/videos
+Lista vídeos HLS já prontos; é a rota principal usada pelo frontend para catálogo.
+* GET /api/videos/hls
+Também lista vídeos HLS prontos no catálogo (equivalente funcional à rota acima).
+* GET /api/videos/sources
+Lista os arquivos .mp4 brutos disponíveis na pasta de vídeos.
+* POST /api/videos/{video_id}/hls
+Gera (ou retorna como já pronto) o pacote HLS do vídeo informado.
+* GET /api/videos/{video_id}/hls/status
+Consulta o status da geração HLS de um vídeo (incluindo existência da playlist).
+* GET /hls/*
+Serve os arquivos estáticos HLS (playlist .m3u8 e segmentos .ts) do diretório de HLS.
+* GET /* (inclui /)
+Serve o frontend estático (HTML/CSS/JS) a partir da pasta static.
+
+Detalhes importantes:
+* Eu desejo apenas a informações que estejam em hls
+* Não há necessidade de feature para conversão de .mp4 em hls
+* O retorno body da rota de listagem hls é:
+{
+  "videos": [    {      "id": "Corrente_do_Mal",      "title": "Corrente do Mal",      "playlist_url": "/hls/Corrente_do_Mal/playlist.m3u8"    }
+  ]
+}
+
+Stack para produção:
+* Apenas arquivos .html, .js e .css para criação simples de interface sem framework
+* Os nomes dos arquivos devem ser:
+- index.html
+- app.js
+- style.css
 
 Tarefa:
-- Altere os arquivos para uma apresentação de tela indicado em frontend.png
-- Faça uma paginação de arquivos de 8 em 8 filmes
+- Implemente a interface desejada
 
 Regras:
 - Essa tarefa é restrita e todos as regras e desejos devem ser obedecidos
-- Estilização e estética dos elementos em UI é livre e pode ser feito do jeito que desejar
+- Estilização e estética dos elementos em UI é livre e pode ser feito do jeito que desejar, entretanto é recomendado tons azuis
