@@ -10,8 +10,11 @@ from app.view.schemas import HlsJobResponse
 
 
 async def generate_hls_for_video(video_id: str) -> HlsJobResponse:
-    input_path = resolve_video_path(video_id)
-    playlist = hls_playlist_path(video_id)
+    # Força o ID a não ter espaços antes de qualquer operação de path
+    clean_id = video_id.replace(" ", "_")
+    
+    input_path = resolve_video_path(video_id) # O arquivo original pode ter espaço
+    playlist = hls_playlist_path(clean_id)     # A pasta HLS NÃO deve te
     assert_playlist_under_hls_root(playlist)
 
     if playlist.is_file():

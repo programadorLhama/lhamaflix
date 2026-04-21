@@ -2,7 +2,7 @@ from fastapi import APIRouter
 
 from app.controllers.hls_generation import generate_hls_for_video
 from app.controllers.hls_status_query import hls_job_status
-from app.controllers.list_videos_catalog import list_hls_videos, list_mp4_files
+from app.controllers.list_videos_catalog import list_hls_videos, list_source_files
 from app.view.schemas import HlsJobResponse, HlsVideoListResponse, VideoListResponse
 
 router = APIRouter(prefix="/videos", tags=["videos"])
@@ -22,8 +22,8 @@ def list_hls_catalog():
 
 @router.get("/sources", response_model=VideoListResponse)
 def list_video_sources():
-    """Lista arquivos .mp4 brutos na pasta configurada."""
-    return VideoListResponse(videos=list_mp4_files())
+    """Lista arquivos .mp4 e .mkv brutos na pasta configurada."""
+    return VideoListResponse(videos=list_source_files())
 
 
 @router.post("/{video_id}/hls", response_model=HlsJobResponse)

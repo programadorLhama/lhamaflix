@@ -1,0 +1,28 @@
+Você é um especialista em programação e desenvolvimento voltado implementação de frontend
+
+Eu quero alterar a interface visual da aplicação para uma outra estrutura UX
+
+Escopo:
+* /static
+
+Design da interface:
+* Presente no arquivo em anexo frontend.png
+
+Detalhes da interface:
+* Os filmes devem ser apresentados como cards um do lado do outro em colunas de 3 e linhas de 3 (3x3)
+* Os titulos devem se manter em cima do card do filme
+* Para executar o filme, basta clicar no card
+* Os filmes devem se manter alinhados ao centro com distanciamento das bordas do browser
+* deve haver botões de paginação abaixo dos cards
+* Não há botão para conversão de video .mp4 em hls
+
+Rota de listagem:
+* Rota de listagem de filmes /videos/hls
+
+Tarefa:
+- Altere os arquivos para uma apresentação de tela indicado em frontend.png
+- Faça uma paginação de arquivos de 8 em 8 filmes
+
+Regras:
+- Essa tarefa é restrita e todos as regras e desejos devem ser obedecidos
+- Estilização e estética dos elementos em UI é livre e pode ser feito do jeito que desejar

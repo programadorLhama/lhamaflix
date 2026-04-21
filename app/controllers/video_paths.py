@@ -5,15 +5,20 @@ from fastapi import HTTPException
 
 from app.configs.settings import settings
 
+SUPPORTED_VIDEO_EXTENSIONS = (".mp4", ".mkv")
+
 
 def resolve_video_path(video_id: str) -> Path:
     if re.fullmatch(settings.safe_id, video_id) is None:
         raise HTTPException(status_code=400, detail="video_id inválido")
-    candidate = (settings.videos_dir / f"{video_id}.mp4").resolve()
     videos_root = settings.videos_dir.resolve()
-    if not str(candidate).startswith(str(videos_root)) or not candidate.is_file():
-        raise HTTPException(status_code=404, detail="Vídeo não encontrado")
-    return candidate
+
+    for extension in SUPPORTED_VIDEO_EXTENSIONS:
+        candidate = (settings.videos_dir / f"{video_id}{extension}").resolve()
+        if str(candidate).startswith(str(videos_root)) and candidate.is_file():
+            return candidate
+
+    raise HTTPException(status_code=404, detail="Vídeo não encontrado")
 
 
 def hls_playlist_path(video_id: str) -> Path:

@@ -1,3 +1,5 @@
+import mimetypes
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -15,6 +17,10 @@ def _ensure_dirs() -> None:
 
 
 def create_app() -> FastAPI:
+    # Garante MIME correto para HLS em todos os ambientes.
+    mimetypes.add_type("application/vnd.apple.mpegurl", ".m3u8")
+    mimetypes.add_type("video/mp2t", ".ts")
+
     application = FastAPI(title="HLS Streaming API", version="0.1.0")
     application.add_middleware(
         CORSMiddleware,

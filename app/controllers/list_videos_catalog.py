@@ -2,25 +2,37 @@ import re
 from pathlib import Path
 
 from app.configs.settings import settings
+from app.controllers.video_paths import SUPPORTED_VIDEO_EXTENSIONS
 from app.view.schemas import HlsVideoItem, VideoItem
 
 
-def list_mp4_files() -> list[VideoItem]:
+def list_source_files() -> list[VideoItem]:
     videos_dir: Path = settings.videos_dir
     if not videos_dir.is_dir():
         return []
+
     items: list[VideoItem] = []
-    for p in sorted(videos_dir.glob("*.mp4")):
-        if not p.is_file():
-            continue
-        stem = p.stem
-        items.append(
-            VideoItem(
-                id=stem,
-                filename=p.name,
-                path=str(p.resolve()),
+
+    seen_ids: set[str] = set()
+    for extension in SUPPORTED_VIDEO_EXTENSIONS:
+        for p in sorted(videos_dir.glob(f"*{extension}")):
+            if not p.is_file():
+                continue
+
+            stem = p.stem
+            if stem in seen_ids:
+                # Evita duplicidade quando existir mesmo stem em duas extensões.
+                continue
+
+            seen_ids.add(stem)
+            items.append(
+                VideoItem(
+                    id=stem,
+                    filename=p.name,
+                    path=str(p.resolve()),
+                )
             )
-        )
+
     return items
 
 

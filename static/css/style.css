@@ -1,151 +1,243 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap");
-
 :root {
-  color-scheme: dark;
-  --bg: #0f1419;
-  --surface: #1a2332;
-  --border: #2d3a4d;
-  --text: #e7ecf3;
-  --muted: #8b9cb3;
-  --accent: #3d8bfd;
-  --accent-hover: #5aa0ff;
-  --danger: #f87171;
-  --radius: 10px;
-  --font: "DM Sans", system-ui, -apple-system, sans-serif;
+  --bg-color: #050a0f;
+  --card-bg: #101820;
+  --primary-blue: #00d2ff;
+  --accent-blue: #3a86ff;
+  --text-color: #ffffff;
+  --highlight: #4ade80;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+/* Reset básico */
+* { box-sizing: border-box; }
 
 body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   margin: 0;
-  min-height: 100vh;
-  font-family: var(--font);
-  background: radial-gradient(1200px 600px at 20% -10%, #1e2a3d 0%, var(--bg) 55%);
-  color: var(--text);
-  line-height: 1.5;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.header {
-  padding: 2rem 1.5rem 1rem;
+header {
+  padding: 20px;
   text-align: center;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(0, 210, 255, 0.1);
 }
 
-.header h1 {
-  margin: 0 0 0.35rem;
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.subtitle {
+#logo {
+  color: var(--primary-blue);
+  font-size: 1.8rem;
+  letter-spacing: 3px;
   margin: 0;
-  color: var(--muted);
-  font-size: 0.95rem;
 }
 
-.main {
-  max-width: 960px;
+/* Títulos */
+.section-title {
+  color: #fca311;
+  text-align: center;
+  margin: 20px 0;
+  font-size: 1.4rem;
+}
+
+/* GRID MOBILE FIRST (1 coluna por padrão) */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr; /* Uma coluna no mobile */
+  gap: 25px;
+  padding: 0 20px;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 1.5rem;
+}
+
+.movie-card {
+  cursor: pointer;
+  width: 100%; /* Ocupa a largura disponível */
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
 }
 
-.panel {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.25rem 1.5rem;
-}
+.card-header { margin-bottom: 8px; }
+.card-title { color: var(--highlight); font-weight: 600; font-size: 1rem; }
 
-.hint {
-  margin: 0 0 1rem;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-.hint code {
-  font-size: 0.85em;
-  padding: 0.15em 0.45em;
-  background: var(--bg);
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  color: var(--text);
-}
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  align-items: center;
-}
-
-.btn {
-  font-family: inherit;
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 0.65rem 1.25rem;
+.card-thumb {
+  aspect-ratio: 2 / 3; /* Mantém proporção de poster */
+  border: 2px solid var(--accent-blue);
   border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--text);
+  background-size: cover;
+  background-position: center;
+  background-color: var(--card-bg);
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+/* Paginação adaptável */
+.pagination {
+  margin: 40px 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.page-btn {
+  background: #16202c;
+  border: 1px solid var(--accent-blue);
+  color: white;
+  padding: 12px 18px; /* Área de toque maior para mobile */
+  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s, opacity 0.15s;
 }
 
-.btn:hover:not(:disabled) {
-  border-color: var(--muted);
+/* PLAYER VIEW */
+.hidden { display: none; }
+#player-view { width: 100%; padding: 10px; }
+.player-controls-top {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
 }
+.movie-playing-name { font-size: 1.1rem; color: var(--primary-blue); margin: 0; }
 
-.btn:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-
-.btn-primary {
-  background: var(--accent);
-  border-color: transparent;
-  color: #fff;
-}
-
-.btn-primary:hover:not(:disabled) {
-  background: var(--accent-hover);
-}
-
-.status {
-  margin: 1rem 0 0;
-  min-height: 1.5em;
-  font-size: 0.9rem;
-  color: var(--muted);
-}
-
-.status.is-error {
-  color: var(--danger);
-}
-
-.status.is-ok {
-  color: #86efac;
-}
-
-.player-wrap {
-  background: #000;
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid var(--border);
-  aspect-ratio: 16 / 9;
-  max-height: 70vh;
-}
-
-.video {
-  display: block;
+.video-container {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
   background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+video { width: 100%; display: block; }
+
+.btn-back {
+  background: var(--accent-blue);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* --- MEDIA QUERIES PARA TELAS MAIORES --- */
+
+/* Tablet (2 colunas) */
+@media (min-width: 600px) {
+  #logo { font-size: 2.2rem; }
+  .grid-container { grid-template-columns: repeat(2, 1fr); }
+  .section-title { font-size: 1.6rem; }
+}
+
+/* Desktop (3 colunas conforme solicitado) */
+@media (min-width: 992px) {
+  #logo { font-size: 2.8rem; }
+  .grid-container { 
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 40px; 
+      padding: 0 50px;
+  }
+  .movie-card:hover { transform: translateY(-8px); transition: 0.3s; }
+  .movie-card:hover .card-thumb { border-color: var(--primary-blue); }
+  
+  .play-overlay {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 210, 255, 0.2);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: 0.3s;
+  }
+  .play-overlay span { font-size: 3.5rem; color: white; }
+  .movie-card:hover .play-overlay { opacity: 1; }
+}
+
+/* Estilo para a Logo Acolhedora */
+.welcome-header {
+  padding: 40px 20px;
+  text-align: center;
+  background: linear-gradient(to bottom, rgba(0, 210, 255, 0.05), transparent);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+#logo {
+  font-family: 'Lexend', 'Segoe UI', sans-serif; /* Uma fonte arredondada é mais amigável */
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(45deg, #00d2ff, #3a86ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+  filter: drop-shadow(0 4px 10px rgba(0, 210, 255, 0.3));
+}
+
+.llama-icon {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+  animation: bounce 3s infinite ease-in-out;
+}
+
+.welcome-text {
+  color: #a0aec0;
+  font-size: 1.1rem;
+  max-width: 400px;
+  margin: 0 auto;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+/* Animação suave para a Lhama */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+/* Ajuste mobile */
+@media (max-width: 600px) {
+  #logo { font-size: 2.2rem; }
+  .llama-icon { font-size: 1.8rem; }
+  .welcome-text { font-size: 0.95rem; padding: 0 20px; }
+}
+
+/* Adicione estas regras ao seu style.css */
+
+.player-controls-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Botão de Voltar de um lado, Cast do outro */
+  margin-bottom: 15px;
+  padding: 0 10px;
+}
+
+/* Estilizando o ícone do Google Cast */
+google-cast-launcher {
+  --connected-color: var(--primary-blue);
+  --disconnected-color: white;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+/* No Mobile, garantir que o vídeo ocupe bem a tela */
+@media (max-width: 600px) {
+  .player-controls-top {
+      gap: 10px;
+  }
+  #cast-button {
+      width: 35px;
+      height: 35px;
+  }
+}
+
+google-cast-launcher {
+  display: block !important;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.1); /* Um fundo leve para você ver onde ele está */
+  border-radius: 50%;
+  padding: 5px;
 }

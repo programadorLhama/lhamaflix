@@ -1,36 +1,43 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lhamaflix Streaming</title>
-    <link rel="stylesheet" href="/css/style.css" />
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lhamaflix - Streaming</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://www.gstatic.com/cv/js/sender/v3/cast_sender.js?loadCastFramework=1"></script>
   </head>
-  <body>
-    <header class="header">
-      <h1>Lhamaflix Streaming</h1>
-      <p class="subtitle">Reprodução HLS via API local</p>
+<body>
+    <header class="welcome-header">
+        <div class="logo-container">
+            <h1 id="logo">Lhamaflix</h1>
+            <span class="llama-icon">🦙</span>
+        </div>
+        <p class="welcome-text">Prepare a pipoca e escolha sua próxima aventura.</p>
     </header>
 
-    <main class="main">
-      <section class="panel">
-        <p class="hint">
-          O vídeo esperado é <code>videos/Corrente_do_Mal.mp4</code>. Primeiro gera-se o pacote HLS; depois o
-          player carrega o manifesto.
-        </p>
-        <div class="actions">
-          <button type="button" id="btnPrepare" class="btn btn-primary">Preparar HLS</button>
-          <button type="button" id="btnPlay" class="btn" disabled>Reproduzir</button>
-        </div>
-        <p id="status" class="status" role="status"></p>
-      </section>
+    <main id="app">
+        <section id="catalog-view"><br/><br/>
+            <div id="movie-grid" class="grid-container"></div>
+            <div class="pagination" id="pagination"></div>
+        </section>
 
-      <section class="player-wrap">
-        <video id="video" class="video" controls playsinline></video>
-      </section>
+        <section id="player-view" class="hidden">
+            <div class="player-controls-top">
+                <button id="back-button" class="btn-back">← Voltar</button>
+                <google-cast-launcher id="cast-button"></google-cast-launcher>
+            </div>
+            <div class="video-container">
+                <video id="video-player" 
+                       controls 
+                       playsinline 
+                       x-webkit-airplay="allow" 
+                       webkit-playsinline>
+                </video>
+            </div>
+        </section>
     </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.7/dist/hls.min.js"></script>
-    <script src="/js/app.js" defer></script>
-  </body>
+    <script src="js/app.js"></script>
+</body>
 </html>
